@@ -51,7 +51,7 @@ const taskStore = useTaskStore();
 
 
 onMounted(() => {
-  taskStore.tasks = JSON.parse(localStorage.getItem("tasks"))
+  taskStore.tasks = JSON.parse(localStorage.getItem("tasks") || "")
 })
 
 </script>
