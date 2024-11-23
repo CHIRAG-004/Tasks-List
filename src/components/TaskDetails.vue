@@ -13,7 +13,7 @@
 import FavIcon from "../assets/fav.svg"
 import NotFavIcon from "../assets/notFav.svg"
 import DeleteIcon from "../assets/delete.svg"
-import { useTaskStore } from "../stores/taskStore.ts"
+import { useTaskStore } from "../stores/taskStore"
 
 
 type Item = {
