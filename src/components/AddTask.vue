@@ -8,15 +8,19 @@
 
 <script setup lang="ts">
 import { useTaskStore } from "../stores/taskStore"
-import { ref } from "vue"
+import { reactive, ref } from "vue"
 
 const taskStore = useTaskStore()
 const newTask = ref("")
-const count = ref(1)
+const idStore: number[] = reactive(taskStore.tasks.map(task => task.id))
 const handleSubmit = () => {
     if (newTask.value.length > 0) {
+        let temp = Math.floor(Math.random() * 1000000)
+        if(idStore.includes(temp)){
+            handleSubmit()
+        }
         taskStore.addTask({
-            id: count.value++,
+            id: temp,
             title: newTask.value,
             isFav: false,
         })

@@ -33,7 +33,7 @@
         (taskStore.totalCount > 1 ? "tasks" :
           "task") :
         `${taskStore.favCount} favourite ` + (taskStore.favCount > 1 ? "tasks" : "task") }} left to do.</p>
-      <div v-for="task in (selectedOption == 'all' ? taskStore.tasks : taskStore.favs)" :key="task.id">
+      <div v-for="(task, index) in (selectedOption == 'all' ? taskStore.tasks : taskStore.favs)" :key="task.id">
         <TaskDetails :task="task" />
       </div>
     </div>
@@ -44,14 +44,14 @@
 import TaskDetails from "./components/TaskDetails.vue";
 import AddTask from "./components/AddTask.vue"
 import { useTaskStore } from "./stores/taskStore";
-import { ref, watchEffect, onMounted } from "vue"
+import { ref, onMounted } from "vue"
 
 const selectedOption = ref("all")
 const taskStore = useTaskStore();
 
 
 onMounted(() => {
-  taskStore.tasks = JSON.parse(localStorage.getItem("tasks") || "")
+  taskStore.tasks = JSON.parse(localStorage.getItem("tasks") || "[]")
 })
 
 </script>
