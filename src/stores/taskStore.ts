@@ -12,8 +12,7 @@ type Tasks = {
 
 export const useTaskStore = defineStore("taskStore", {
     state: () => ({
-        tasks: [
-        ]
+        tasks: []
     } as Tasks),
     getters: {
         favs(): Item[] {
@@ -32,16 +31,20 @@ export const useTaskStore = defineStore("taskStore", {
             localStorage.setItem("tasks", JSON.stringify(this.tasks))
         },
         deleteTask(id: number) {
-            this.tasks = this.tasks.filter(task => task.id !== id)
-            localStorage.setItem("tasks", JSON.stringify(this.tasks))
+            if (id !== 0) {
+                this.tasks = this.tasks.filter(task => task.id !== id)
+                localStorage.setItem("tasks", JSON.stringify(this.tasks))
+            }
 
         },
         toggleFav(id: number) {
-            const task = this.tasks.find(t => t.id == id)
-            if (task) {
-                task.isFav = !task.isFav
+            if (id !== 0) {
+                const task = this.tasks.find(t => t.id == id)
+                if (task) {
+                    task.isFav = !task.isFav
+                }
+                localStorage.setItem("tasks", JSON.stringify(this.tasks))
             }
-            localStorage.setItem("tasks", JSON.stringify(this.tasks))
 
         }
     }
