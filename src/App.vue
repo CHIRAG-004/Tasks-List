@@ -51,7 +51,12 @@ const taskStore = useTaskStore();
 
 
 onMounted(() => {
-  taskStore.tasks = JSON.parse(localStorage.getItem("tasks") || "[]").length > 0 ? JSON.parse(localStorage.getItem("tasks") || "[]") : [{ id: 0, title: "Upgrade yourself", isFav: true }]
-})
+  if(JSON.parse(localStorage.getItem("tasks") || "[]").length > 0){
+    taskStore.tasks = JSON.parse(localStorage.getItem("tasks") || "[]")
+  }
+  else{
+    taskStore.getTasks()
+  }
+})  
 
 </script>

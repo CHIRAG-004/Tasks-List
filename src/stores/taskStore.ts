@@ -27,6 +27,11 @@ export const useTaskStore = defineStore("taskStore", {
         }
     },
     actions: {
+        async getTasks() {
+            let res = await fetch("http://localhost:3000/tasks")
+            let data = await res.json()
+            this.tasks = data
+        },
         addTask(newTask: Item) {
             this.tasks.push(newTask)
             localStorage.setItem("tasks", JSON.stringify(this.tasks))
