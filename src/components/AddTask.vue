@@ -24,7 +24,7 @@ const handleSubmit = () => {
             title: newTask.value,
             isFav: false,
         })
-        
+        idStore.push(temp)
     }
     newTask.value = ""
 }
